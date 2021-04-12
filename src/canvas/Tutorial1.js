@@ -52,7 +52,7 @@ function Tutorial1() {
       ctx.strokeStyle = "blue";
       ctx.stroke();
 
-      if (x + radius > window.innerWidth) {
+      if (x + radius > window.innerWidth || x - radius < 0) {
         dx = -dx;
       }
 
