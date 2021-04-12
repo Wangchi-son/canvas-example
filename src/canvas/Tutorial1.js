@@ -33,8 +33,9 @@ function Tutorial1() {
     for (let i = 0; i < 100; i++) {
       const x = Math.random() * window.innerWidth;
       const y = Math.random() * window.innerHeight;
+      const size = parseInt(Math.random() * 100);
       ctx.beginPath();
-      ctx.arc(x, y, 30, 0, Math.PI * 2, false);
+      ctx.arc(x, y, size, 0, Math.PI * 2, false);
       ctx.strokeStyle = "blue";
       ctx.stroke();
     }
