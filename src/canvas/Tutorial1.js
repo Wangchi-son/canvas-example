@@ -11,18 +11,42 @@ function Tutorial1() {
 
     const ctx = canvas.getContext("2d");
 
-    function Circle(x, y, dx, dy, radius) {
+    const mouse = {
+      x: undefined,
+      y: undefined,
+    };
+
+    const maxRadius = 40;
+    const minRadius = 2;
+
+    const colorArray = [
+      "#ffaa33",
+      "#99ffaa",
+      "#00ff00",
+      "#4411aa",
+      "#ff1100",
+      "#002ee0",
+    ];
+
+    window.addEventListener("mousemove", function (e) {
+      mouse.x = e.x;
+      mouse.y = e.y;
+      console.log(mouse);
+    });
+
+    function Circle(x, y, dx, dy, radius, color) {
       this.x = x;
       this.y = y;
       this.dx = dx;
       this.dy = dy;
       this.radius = radius;
+      this.color = colorArray[parseInt(Math.random() * colorArray.length)];
 
       this.draw = function () {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        ctx.strokeStyle = "blue";
-        ctx.stroke();
+        ctx.fillStyle = this.color;
+        ctx.fill();
       };
 
       this.update = function () {
@@ -43,13 +67,27 @@ function Tutorial1() {
         this.x += this.dx;
         this.y += this.dy;
 
+        // interactivity
+        if (
+          mouse.x - this.x < 50 &&
+          mouse.x - this.x > -50 &&
+          mouse.y - this.y < 50 &&
+          mouse.y - this.y > -50
+        ) {
+          if (this.radius < maxRadius) {
+            this.radius += 1;
+          }
+        } else if (this.radius > minRadius) {
+          this.radius -= 1;
+        }
+
         this.draw();
       };
     }
 
     var circleArray = [];
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 200; i++) {
       var radius = 30;
       var x = Math.random() * (window.innerWidth - radius * 2) + radius;
       var y = Math.random() * (window.innerHeight - radius * 2) + radius;
