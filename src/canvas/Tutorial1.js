@@ -50,11 +50,11 @@ function Tutorial1() {
     var circleArray = [];
 
     for (var i = 0; i < 100; i++) {
-      var x = Math.random() * window.innerWidth;
-      var y = Math.random() * window.innerHeight;
+      var radius = 30;
+      var x = Math.random() * (window.innerWidth - radius * 2) + radius;
+      var y = Math.random() * (window.innerHeight - radius * 2) + radius;
       var dx = (Math.random() - 0.5) * 2;
       var dy = (Math.random() - 0.5) * 2;
-      var radius = 30;
 
       circleArray.push(new Circle(x, y, dx, dy, radius));
     }
