@@ -1,11 +1,11 @@
 import React from "react";
-import Metaball from "./canvas/Metaball";
 import Tutorial1 from "./canvas/Tutorial1";
+import PixiExam from "./canvas/PixiExam";
 
 function App() {
   return (
     <>
-      <Metaball />
+      <PixiExam />
     </>
   );
 }

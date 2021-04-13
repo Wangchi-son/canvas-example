@@ -4,9 +4,25 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import styled from "styled-components";
+
+import WebGL from "./WebGL";
+
+const AppWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const Container = styled.div``;
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppWrapper>
+      <Container>
+        <WebGL />
+      </Container>
+    </AppWrapper>
   </React.StrictMode>,
   document.getElementById("root")
 );
