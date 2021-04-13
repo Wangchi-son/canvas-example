@@ -105,6 +105,7 @@ function Tutorial1() {
         circleArray[i].update();
       }
     }
+
     animate();
     init();
   });
