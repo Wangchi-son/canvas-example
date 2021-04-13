@@ -1209,6 +1209,14 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@inlet/react-pixi@^6.5.0":
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/@inlet/react-pixi/-/react-pixi-6.5.0.tgz#b6c06739c8258953b303578a795c491706babd60"
+  integrity sha512-BsmOFNcJN4j018G3gxEmwKtrCnbWtEef7cbidHkz/Gpl1/t+qpvBfzhri6a4FlzcAShg+yEjG7Me3PVDDRs2+g==
+  dependencies:
+    performance-now "2.1.0"
+    react-reconciler "0.26.2"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -8044,7 +8052,7 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-performance-now@^2.1.0:
+performance-now@2.1.0, performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
@@ -9131,6 +9139,15 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-reconciler@0.26.2:
+  version "0.26.2"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.26.2.tgz#bbad0e2d1309423f76cf3c3309ac6c96e05e9d91"
+  integrity sha512-nK6kgY28HwrMNwDnMui3dvm3rCFjZrcGiuwLc5COUipBK5hWHLOxMJhSnSomirqWwjPBJKV1QcbkI0VJr7Gl1Q==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    scheduler "^0.20.2"
+
 react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
@@ -9751,9 +9768,9 @@ schema-utils@^3.0.0:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-"scroller@git://github.com/mjohnston/scroller.git":
+"scroller@git://github.com/mjohnston/scroller":
   version "0.0.1"
-  resolved "git://github.com/mjohnston/scroller.git#054c3349d5ff7474589eb7fbbb36708e5c48e435"
+  resolved "git://github.com/mjohnston/scroller#054c3349d5ff7474589eb7fbbb36708e5c48e435"
 
 select-hose@^2.0.0:
   version "2.0.0"
