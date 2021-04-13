@@ -1,5 +1,6 @@
 import { Hello } from "./example/hello";
 import { France } from "./example/france";
+import { Gradient5 } from "./example/gradient5";
 
 export function Exam1() {
   //
@@ -13,4 +14,5 @@ export function Exam1() {
   // 캔버스 내용
   Hello(ctx);
   France(ctx);
+  Gradient5(ctx);
 }
