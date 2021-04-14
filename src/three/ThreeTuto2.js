@@ -26,12 +26,6 @@ export class ThreeTuto2 extends Component {
     // HTML canvas
     this.element.appendChild(renderer.domElement);
 
-    // BoxGeometry(가로(x), 세로(y), 깊이(z))
-    const BoxGeometry = new THREE.BoxGeometry(1, 1, 2);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(BoxGeometry, material);
-    scene.add(cube);
-
     // PlanveGeometry
     const planeGeometry = new THREE.PlaneGeometry(5, 5, 1, 1);
     const planeMeterial = new THREE.MeshBasicMaterial({
@@ -47,7 +41,6 @@ export class ThreeTuto2 extends Component {
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
-    this.cube = cube;
     this.planeMesh = planeMesh;
     this.animate();
   }
@@ -59,10 +52,6 @@ export class ThreeTuto2 extends Component {
 
   animate = () => {
     this.renderer.render(this.scene, this.camera);
-    this.cube.rotation.x += 0.01;
-    this.cube.rotation.y += 0.01;
-    this.cube.rotation.z += 0.01;
-    this.planeMesh.rotation.x += 0.01;
     requestAnimationFrame(this.animate);
   };
 
