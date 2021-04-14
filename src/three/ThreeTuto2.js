@@ -34,7 +34,10 @@ export class ThreeTuto2 extends Component {
 
     // PlanveGeometry
     const planeGeometry = new THREE.PlaneGeometry(5, 5, 1, 1);
-    const planeMeterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const planeMeterial = new THREE.MeshBasicMaterial({
+      color: 0xff0000,
+      side: THREE.DoubleSide
+    });
     const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
     scene.add(planeMesh);
 
