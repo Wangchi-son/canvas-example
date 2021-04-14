@@ -1,20 +1,57 @@
-export function Circle(x, y, dx, dy, radius, ctx) {
-  const colorArray = ['#9de0ff', '#57ACE2', '#0072B5', '#254969'];
+export function Circle(ctx) {
+  function makeCircle(x, y, dx, dy, radius) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
 
-  const minRadius = radius;
-  const maxRadius = radius * 12;
-  const color = colorArray[parseInt(Math.random() * colorArray.length)];
+    this.draw = function () {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      ctx.strokeStyle = 'blue';
+      ctx.stroke();
+    };
 
-  console.log(minRadius);
-  console.log(maxRadius);
-  console.log(color);
+    this.update = function () {
+      if (
+        this.x + this.radius > window.innerWidth ||
+        this.x - this.radius < 0
+      ) {
+        this.dx = -this.dx;
+      }
 
-  const draw = () => {
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-    ctx.fillStyle = color;
-    ctx.fill();
-  };
+      if (
+        this.y + this.radius > window.innerHeight ||
+        this.y - this.radius < 0
+      ) {
+        this.dy = -this.dy;
+      }
 
-  draw();
+      this.x += this.dx;
+      this.y += this.dy;
+
+      this.draw();
+    };
+  }
+
+  var circleArray = [];
+
+  for (var i = 0; i < 100; i++) {
+    var x = Math.random() * window.innerWidth;
+    var y = Math.random() * window.innerHeight;
+    var dx = (Math.random() - 0.5) * 2;
+    var dy = (Math.random() - 0.5) * 2;
+    var radius = 30;
+    circleArray.push(new makeCircle(x, y, dx, dy, radius));
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    for (let i = 0; i < circleArray.length; i++) {
+      circleArray[i].update();
+    }
+  }
+  animate();
 }

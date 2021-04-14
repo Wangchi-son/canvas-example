@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
-import "./css/canvas.css";
+import React, { useEffect } from 'react';
+import './css/canvas.css';
 
 function Tutorial1() {
   useEffect(() => {
-    const canvas = document.getElementById("canvas");
+    const canvas = document.getElementById('canvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
 
     const mouse = {
       x: undefined,
-      y: undefined,
+      y: undefined
     };
 
-    const colorArray = ["#9de0ff", "#57ACE2", "#0072B5", "#254969"];
+    const colorArray = ['#9de0ff', '#57ACE2', '#0072B5', '#254969'];
 
-    window.addEventListener("mousemove", function (e) {
+    window.addEventListener('mousemove', function (e) {
       mouse.x = e.x;
       mouse.y = e.y;
       console.log(mouse);
     });
 
-    window.addEventListener("resize", function () {
+    window.addEventListener('resize', function () {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 

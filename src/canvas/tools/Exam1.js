@@ -15,6 +15,9 @@ export function Exam1() {
   const canvas = document.querySelector('canvas');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+  console.log(canvas.width);
+  console.log(canvas.height);
   // 캔버스 context
   const ctx = canvas.getContext('2d');
 
@@ -23,13 +26,6 @@ export function Exam1() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
-
-  // 값 지정
-  const radius = Math.random() * 8 + 1;
-  const x = Math.random() * (window.innerWidth - radius * 2) + radius;
-  const y = Math.random() * (window.innerHeight = radius * 2) + radius;
-  const dx = (Math.random() - 0.5) * 2;
-  const dy = (Math.random() - 0.5) * 2;
 
   // 캔버스 내용
   // Hello(ctx);
@@ -41,5 +37,7 @@ export function Exam1() {
   // Transform(ctx);
   // GlobalAlpha(ctx);
   Let1(ctx);
-  Circle(x, y, dx, dy, radius, ctx);
+
+  //
+  Circle(ctx);
 }
