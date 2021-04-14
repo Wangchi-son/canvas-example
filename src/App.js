@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
+import ThreeTuto from './three/ThreeTuto';
 // import Tutorial1 from "./canvas/Tutorial1";
-import Tutorial2 from "./canvas/Tutorial2";
 
 function App() {
   return (
     <>
-      <Tutorial2 />
+      <ThreeTuto />
     </>
   );
 }
