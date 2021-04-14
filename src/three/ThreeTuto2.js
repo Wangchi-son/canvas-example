@@ -28,12 +28,27 @@ export class ThreeTuto2 extends Component {
 
     // PlanveGeometry
     const planeGeometry = new THREE.PlaneGeometry(5, 5, 1, 1);
-    const planeMeterial = new THREE.MeshBasicMaterial({
+    const planeMeterial = new THREE.MeshPhongMaterial({
       color: 0xff0000,
       side: THREE.DoubleSide
     });
     const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
     scene.add(planeMesh);
+
+    // x,y,z값 조정 방법
+    const { array } = planeMesh.geometry.attributes.position;
+    for (let i = 0; i < array.length; i += 3) {
+      const x = array[i];
+      const y = array[i + 1];
+      const z = array[i + 2];
+
+      array[i] = x + 1;
+    }
+
+    // 빛
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(0, 0, 1);
+    scene.add(light);
 
     // 카메라 뷰 깊이
     camera.position.z = 5;
