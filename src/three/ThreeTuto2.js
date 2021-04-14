@@ -20,21 +20,32 @@ export class ThreeTuto2 extends Component {
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
 
+    // 픽셀단위로 진하게 해줌
+    renderer.setPixelRatio(devicePixelRatio);
+
     // HTML canvas
     this.element.appendChild(renderer.domElement);
 
     // BoxGeometry(가로(x), 세로(y), 깊이(z))
-    const geometry = new THREE.BoxGeometry(1, 1, 2);
+    const BoxGeometry = new THREE.BoxGeometry(1, 1, 2);
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
+    const cube = new THREE.Mesh(BoxGeometry, material);
     scene.add(cube);
 
+    // PlanveGeometry
+    const planeGeometry = new THREE.PlaneGeometry(5, 5, 1, 1);
+    const planeMeterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
+    scene.add(planeMesh);
+
+    // 카메라 뷰 깊이
     camera.position.z = 5;
 
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
     this.cube = cube;
+    this.planeMesh = planeMesh;
     this.animate();
   }
 
@@ -47,6 +58,8 @@ export class ThreeTuto2 extends Component {
     this.renderer.render(this.scene, this.camera);
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
+    this.cube.rotation.z += 0.01;
+    this.planeMesh.rotation.x += 0.01;
     requestAnimationFrame(this.animate);
   };
 
