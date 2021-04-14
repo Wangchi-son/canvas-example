@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 
+import * as dat from 'dat.gui';
+
 export class ThreeTuto2 extends Component {
   componentDidMount() {
     const width = window.innerWidth - 1;
@@ -27,7 +29,7 @@ export class ThreeTuto2 extends Component {
     this.element.appendChild(renderer.domElement);
 
     // PlanveGeometry
-    const planeGeometry = new THREE.PlaneGeometry(5, 5, 10, 10);
+    const planeGeometry = new THREE.PlaneGeometry(10, 10, 10, 10);
     const planeMeterial = new THREE.MeshPhongMaterial({
       color: 0xff0000,
       side: THREE.DoubleSide,
@@ -35,6 +37,32 @@ export class ThreeTuto2 extends Component {
     });
     const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
     scene.add(planeMesh);
+
+    //GUI
+    const gui = new dat.GUI();
+    const world = {
+      plane: {
+        width: 5
+      }
+    };
+    gui.add(world.plane, 'width', 1, 20).onChange(() => {
+      planeMesh.geometry.dispose();
+      planeMesh.geometry = new THREE.PlaneGeometry(
+        world.plane.width,
+        10,
+        10,
+        10,
+        10
+      );
+      const { array } = planeMesh.geometry.attributes.position;
+      for (let i = 0; i < array.length; i += 3) {
+        const x = array[i];
+        const y = array[i + 1];
+        const z = array[i + 2];
+
+        array[i + 2] = z + Math.random();
+      }
+    });
 
     // x,y,z값 조정 방법
     const { array } = planeMesh.geometry.attributes.position;
