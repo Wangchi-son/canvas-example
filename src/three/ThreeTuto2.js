@@ -27,10 +27,11 @@ export class ThreeTuto2 extends Component {
     this.element.appendChild(renderer.domElement);
 
     // PlanveGeometry
-    const planeGeometry = new THREE.PlaneGeometry(5, 5, 1, 1);
+    const planeGeometry = new THREE.PlaneGeometry(5, 5, 10, 10);
     const planeMeterial = new THREE.MeshPhongMaterial({
       color: 0xff0000,
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
+      flatShading: THREE.FlatShading
     });
     const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
     scene.add(planeMesh);
@@ -42,7 +43,7 @@ export class ThreeTuto2 extends Component {
       const y = array[i + 1];
       const z = array[i + 2];
 
-      array[i] = x + 1;
+      array[i + 2] = z + Math.random();
     }
 
     // 빛
