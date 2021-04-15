@@ -9,6 +9,9 @@ export class ThreeTuto2 extends Component {
     const width = window.innerWidth - 1;
     const height = window.innerHeight - 1;
 
+    //raycaster 추가
+    const raycaster = new THREE.Raycaster();
+
     // 카메라로 찍으려는 3D무대
     const scene = new THREE.Scene();
 
@@ -106,10 +109,23 @@ export class ThreeTuto2 extends Component {
     // 카메라 뷰 깊이
     camera.position.z = 5;
 
+    const mouse = {
+      x: undefined,
+      y: undefined
+    };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
     this.planeMesh = planeMesh;
+
+    this.mouse = mouse;
+    this.raycaster = raycaster;
     this.animate();
   }
 
@@ -121,21 +137,16 @@ export class ThreeTuto2 extends Component {
   animate = () => {
     this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(this.animate);
+
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    const intersects = this.raycaster.intersectObject(this.planeMesh);
+    if (intersects.length > 0) {
+      console.log('intersecting');
+    }
   };
 
   render() {
     // 마우스 무브 움직임 추가
-    const mouse = {
-      x: undefined,
-      y: undefined
-    };
-
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-      console.log(mouse);
-    });
 
     return <div ref={(el) => (this.element = el)}></div>;
   }
