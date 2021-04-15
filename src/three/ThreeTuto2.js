@@ -3,11 +3,12 @@ import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 
 import * as dat from 'dat.gui';
+import gsap from 'gsap';
 
 export class ThreeTuto2 extends Component {
   componentDidMount() {
-    const width = window.innerWidth - 1;
-    const height = window.innerHeight - 1;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
     //raycaster 추가
     const raycaster = new THREE.Raycaster();
@@ -32,39 +33,28 @@ export class ThreeTuto2 extends Component {
 
     // HTML canvas
     this.element.appendChild(renderer.domElement);
-
-    // PlanveGeometry
-    const planeGeometry = new THREE.PlaneGeometry(10, 10, 10, 10);
-    const planeMeterial = new THREE.MeshPhongMaterial({
-      side: THREE.DoubleSide,
-      flatShading: THREE.FlatShading,
-      vertexColors: true
-    });
-    const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
-    scene.add(planeMesh);
-
     //GUI
     const gui = new dat.GUI();
     const world = {
       plane: {
-        width: 10,
-        height: 10,
-        widthSegments: 10,
-        heightSegments: 10
+        width: 20,
+        height: 20,
+        widthSegments: 17,
+        heightSegments: 17
       }
     };
 
     // x값 조정하는 GUI
-    gui.add(world.plane, 'width', 1, 20).onChange(generatePlane);
+    gui.add(world.plane, 'width', 1, 40).onChange(generatePlane);
 
     // y값 조정하는 GUI
-    gui.add(world.plane, 'height', 1, 20).onChange(generatePlane);
+    gui.add(world.plane, 'height', 1, 40).onChange(generatePlane);
 
     // x seg값 조정하는 GUI
-    gui.add(world.plane, 'widthSegments', 1, 100).onChange(generatePlane);
+    gui.add(world.plane, 'widthSegments', 1, 50).onChange(generatePlane);
 
     // y seg값 조정하는 GUI
-    gui.add(world.plane, 'heightSegments', 1, 100).onChange(generatePlane);
+    gui.add(world.plane, 'heightSegments', 1, 50).onChange(generatePlane);
 
     function generatePlane() {
       planeMesh.geometry.dispose();
@@ -82,7 +72,34 @@ export class ThreeTuto2 extends Component {
 
         array[i + 2] = z + Math.random();
       }
+      const colors = [];
+      for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
+        // r,g,b
+        colors.push(0, 0.19, 0.4);
+      }
+      console.log(planeMesh);
+
+      planeMesh.geometry.setAttribute(
+        'color',
+        new THREE.BufferAttribute(new Float32Array(colors), 3)
+      );
     }
+
+    // PlaneGeometry
+    const planeGeometry = new THREE.PlaneGeometry(
+      world.plane.width,
+      world.plane.height,
+      world.plane.widthSegments,
+      world.plane.heightSegments
+    );
+    const planeMeterial = new THREE.MeshPhongMaterial({
+      side: THREE.DoubleSide,
+      flatShading: THREE.FlatShading,
+      vertexColors: true
+    });
+    const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
+    scene.add(planeMesh);
+
     // x,y,z값 조정 방법
     const { array } = planeMesh.geometry.attributes.position;
     for (let i = 0; i < array.length; i += 3) {
@@ -139,6 +156,7 @@ export class ThreeTuto2 extends Component {
 
     this.mouse = mouse;
     this.raycaster = raycaster;
+
     this.animate();
   }
 
@@ -172,6 +190,40 @@ export class ThreeTuto2 extends Component {
       color.setZ(intersects[0].face.c, 1);
 
       color.needsUpdate = true;
+
+      const initialColor = {
+        r: 0,
+        g: 0.19,
+        b: 0.4
+      };
+
+      const hoverColor = {
+        r: 0.1,
+        g: 0.5,
+        b: 1
+      };
+      gsap.to(hoverColor, {
+        r: initialColor.r,
+        g: initialColor.g,
+        b: initialColor.b,
+        duration: 1,
+        onUpdate: () => {
+          // vertice 1
+          color.setX(intersects[0].face.a, hoverColor.r);
+          color.setY(intersects[0].face.a, hoverColor.g);
+          color.setZ(intersects[0].face.a, hoverColor.b);
+
+          // vertice 2
+          color.setX(intersects[0].face.b, hoverColor.r);
+          color.setY(intersects[0].face.b, hoverColor.g);
+          color.setZ(intersects[0].face.b, hoverColor.b);
+
+          // vertice 3
+          color.setX(intersects[0].face.c, hoverColor.r);
+          color.setY(intersects[0].face.c, hoverColor.g);
+          color.setZ(intersects[0].face.c, hoverColor.b);
+        }
+      });
     }
   };
 
