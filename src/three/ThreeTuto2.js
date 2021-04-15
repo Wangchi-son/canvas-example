@@ -79,7 +79,7 @@ export class ThreeTuto2 extends Component {
           array[i + 2] = y + (Math.random() - 0.5) * 3;
           array[i + 2] = z + (Math.random() - 0.5) * 3;
         }
-        randomValue.push(Math.random() - 0.5);
+        randomValue.push(Math.random() * Math.PI * 3);
       }
 
       // randomValue 정의
@@ -178,14 +178,14 @@ export class ThreeTuto2 extends Component {
     for (let i = 0; i < array.length; i += 3) {
       // x
       array[i] =
-        originalPosition[i] + Math.cos(this.frame + randomValue[i]) * 0.003;
+        originalPosition[i] + Math.cos(this.frame + randomValue[i]) * 0.01;
 
       this.planeMesh.geometry.attributes.position.needsUpdate = true;
 
       // y
       array[i + 1] =
         originalPosition[i + 1] +
-        Math.sin(this.frame + randomValue[i + 1]) * 0.003;
+        Math.sin(this.frame + randomValue[i + 1]) * 0.01;
 
       this.planeMesh.geometry.attributes.position.needsUpdate = true;
     }
