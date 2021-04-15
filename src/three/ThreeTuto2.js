@@ -36,9 +36,9 @@ export class ThreeTuto2 extends Component {
     // PlanveGeometry
     const planeGeometry = new THREE.PlaneGeometry(10, 10, 10, 10);
     const planeMeterial = new THREE.MeshPhongMaterial({
-      color: 0xff0000,
       side: THREE.DoubleSide,
-      flatShading: THREE.FlatShading
+      flatShading: THREE.FlatShading,
+      vertexColors: true
     });
     const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
     scene.add(planeMesh);
@@ -92,6 +92,18 @@ export class ThreeTuto2 extends Component {
 
       array[i + 2] = z + Math.random();
     }
+
+    // 색 속성 조정
+    const colors = [];
+    for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
+      colors.push(1, 0, 0);
+    }
+    console.log(planeMesh);
+
+    planeMesh.geometry.setAttribute(
+      'color',
+      new THREE.BufferAttribute(new Float32Array(colors), 3)
+    );
 
     // 빛
     const light = new THREE.DirectionalLight(0xffffff, 1);
