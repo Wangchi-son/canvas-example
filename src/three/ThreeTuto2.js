@@ -4,6 +4,7 @@ import OrbitControls from 'three-orbitcontrols';
 
 import * as dat from 'dat.gui';
 import gsap from 'gsap';
+import { random } from 'gsap/gsap-core';
 
 export class ThreeTuto2 extends Component {
   componentDidMount() {
@@ -37,24 +38,25 @@ export class ThreeTuto2 extends Component {
     const gui = new dat.GUI();
     const world = {
       plane: {
-        width: 20,
-        height: 20,
-        widthSegments: 17,
-        heightSegments: 17
+        width: 400,
+        height: 400,
+        widthSegments: 50,
+        heightSegments: 50
       }
     };
 
     // x값 조정하는 GUI
-    gui.add(world.plane, 'width', 1, 40).onChange(generatePlane);
+    gui.add(world.plane, 'width', 100, 600).onChange(generatePlane);
 
     // y값 조정하는 GUI
-    gui.add(world.plane, 'height', 1, 40).onChange(generatePlane);
+    gui.add(world.plane, 'height', 100, 600).onChange(generatePlane);
 
     // x seg값 조정하는 GUI
-    gui.add(world.plane, 'widthSegments', 1, 50).onChange(generatePlane);
+    gui.add(world.plane, 'widthSegments', 10, 100).onChange(generatePlane);
 
     // y seg값 조정하는 GUI
-    gui.add(world.plane, 'heightSegments', 1, 50).onChange(generatePlane);
+    gui.add(world.plane, 'heightSegments', 10, 100).onChange(generatePlane);
+    const randomValue = [];
 
     function generatePlane() {
       planeMesh.geometry.dispose();
@@ -64,20 +66,33 @@ export class ThreeTuto2 extends Component {
         world.plane.widthSegments,
         world.plane.heightSegments
       );
-      const { array } = planeMesh.geometry.attributes.position;
-      for (let i = 0; i < array.length; i += 3) {
-        const x = array[i];
-        const y = array[i + 1];
-        const z = array[i + 2];
 
-        array[i + 2] = z + Math.random();
+      // x,y,z 값 조정법
+      const { array } = planeMesh.geometry.attributes.position;
+      for (let i = 0; i < array.length; i++) {
+        if (i % 3 === 0) {
+          const x = array[i];
+          const y = array[i + 1];
+          const z = array[i + 2];
+
+          array[i] = x + (Math.random() - 0.5) * 3;
+          array[i + 2] = y + (Math.random() - 0.5) * 3;
+          array[i + 2] = z + (Math.random() - 0.5) * 3;
+        }
+        randomValue.push(Math.random() - 0.5);
       }
+
+      // randomValue 정의
+      planeMesh.geometry.attributes.position.randomValue = randomValue;
+
+      // OriginalPosition 정의
+      planeMesh.geometry.attributes.position.originalPosition =
+        planeMesh.geometry.attributes.position.array;
       const colors = [];
       for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
         // r,g,b
         colors.push(0, 0.19, 0.4);
       }
-      console.log(planeMesh);
 
       planeMesh.geometry.setAttribute(
         'color',
@@ -99,33 +114,11 @@ export class ThreeTuto2 extends Component {
     });
     const planeMesh = new THREE.Mesh(planeGeometry, planeMeterial);
     scene.add(planeMesh);
-
-    // x,y,z값 조정 방법
-    const { array } = planeMesh.geometry.attributes.position;
-    for (let i = 0; i < array.length; i += 3) {
-      const x = array[i];
-      const y = array[i + 1];
-      const z = array[i + 2];
-
-      array[i + 2] = z + Math.random();
-    }
-
-    // 색 속성 조정
-    const colors = [];
-    for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
-      // r,g,b
-      colors.push(0, 0.19, 0.4);
-    }
-    console.log(planeMesh);
-
-    planeMesh.geometry.setAttribute(
-      'color',
-      new THREE.BufferAttribute(new Float32Array(colors), 3)
-    );
+    generatePlane();
 
     // 빛
     const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(0, 0, 1);
+    light.position.set(1, -1, 1);
     scene.add(light);
 
     // 뒤쪽 빛
@@ -137,7 +130,7 @@ export class ThreeTuto2 extends Component {
     new OrbitControls(camera, renderer.domElement);
 
     // 카메라 뷰 깊이
-    camera.position.z = 5;
+    camera.position.z = 50;
 
     const mouse = {
       x: undefined,
@@ -149,6 +142,9 @@ export class ThreeTuto2 extends Component {
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
+    // frame
+    const frame = 0;
+
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;
@@ -157,6 +153,8 @@ export class ThreeTuto2 extends Component {
     this.mouse = mouse;
     this.raycaster = raycaster;
 
+    this.frame = frame;
+    this.randomValue = randomValue;
     this.animate();
   }
 
@@ -168,6 +166,29 @@ export class ThreeTuto2 extends Component {
   animate = () => {
     this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(this.animate);
+
+    // 배경 움직임
+    this.frame += 0.01;
+    const {
+      array,
+      originalPosition,
+      randomValue
+    } = this.planeMesh.geometry.attributes.position;
+
+    for (let i = 0; i < array.length; i += 3) {
+      // x
+      array[i] =
+        originalPosition[i] + Math.cos(this.frame + randomValue[i]) * 0.003;
+
+      this.planeMesh.geometry.attributes.position.needsUpdate = true;
+
+      // y
+      array[i + 1] =
+        originalPosition[i + 1] +
+        Math.sin(this.frame + randomValue[i + 1]) * 0.003;
+
+      this.planeMesh.geometry.attributes.position.needsUpdate = true;
+    }
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
     const intersects = this.raycaster.intersectObject(this.planeMesh);
@@ -228,8 +249,6 @@ export class ThreeTuto2 extends Component {
   };
 
   render() {
-    // 마우스 무브 움직임 추가
-
     return <div ref={(el) => (this.element = el)}></div>;
   }
 }
