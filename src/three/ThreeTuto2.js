@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
+import OrbitControls from 'three-orbitcontrols';
 
 import * as dat from 'dat.gui';
 
@@ -10,6 +11,7 @@ export class ThreeTuto2 extends Component {
 
     // 카메라로 찍으려는 3D무대
     const scene = new THREE.Scene();
+
     // 카메라
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -56,10 +58,10 @@ export class ThreeTuto2 extends Component {
     gui.add(world.plane, 'height', 1, 20).onChange(generatePlane);
 
     // x seg값 조정하는 GUI
-    gui.add(world.plane, 'widthSegments', 1, 20).onChange(generatePlane);
+    gui.add(world.plane, 'widthSegments', 1, 100).onChange(generatePlane);
 
     // y seg값 조정하는 GUI
-    gui.add(world.plane, 'heightSegments', 1, 20).onChange(generatePlane);
+    gui.add(world.plane, 'heightSegments', 1, 100).onChange(generatePlane);
 
     function generatePlane() {
       planeMesh.geometry.dispose();
@@ -93,6 +95,14 @@ export class ThreeTuto2 extends Component {
     light.position.set(0, 0, 1);
     scene.add(light);
 
+    // 뒤쪽 빛
+    const backLight = new THREE.DirectionalLight(0xffffff, 1);
+    backLight.position.set(0, 0, -1);
+    scene.add(backLight);
+
+    // OrbitControls
+    new OrbitControls(camera, renderer.domElement);
+
     // 카메라 뷰 깊이
     camera.position.z = 5;
 
@@ -114,6 +124,19 @@ export class ThreeTuto2 extends Component {
   };
 
   render() {
+    // 마우스 무브 움직임 추가
+    const mouse = {
+      x: undefined,
+      y: undefined
+    };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      console.log(mouse);
+    });
+
     return <div ref={(el) => (this.element = el)}></div>;
   }
 }
