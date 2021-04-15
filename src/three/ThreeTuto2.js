@@ -38,10 +38,10 @@ export class ThreeTuto2 extends Component {
     const gui = new dat.GUI();
     const world = {
       plane: {
-        width: 400,
-        height: 400,
-        widthSegments: 50,
-        heightSegments: 50
+        width: 800,
+        height: 800,
+        widthSegments: 100,
+        heightSegments: 100
       }
     };
 
@@ -52,10 +52,10 @@ export class ThreeTuto2 extends Component {
     gui.add(world.plane, 'height', 100, 600).onChange(generatePlane);
 
     // x seg값 조정하는 GUI
-    gui.add(world.plane, 'widthSegments', 10, 100).onChange(generatePlane);
+    gui.add(world.plane, 'widthSegments', 10, 200).onChange(generatePlane);
 
     // y seg값 조정하는 GUI
-    gui.add(world.plane, 'heightSegments', 10, 100).onChange(generatePlane);
+    gui.add(world.plane, 'heightSegments', 10, 200).onChange(generatePlane);
     const randomValue = [];
 
     function generatePlane() {
@@ -91,7 +91,7 @@ export class ThreeTuto2 extends Component {
       const colors = [];
       for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
         // r,g,b
-        colors.push(0, 0.19, 0.4);
+        colors.push(0.05, 0.1, 0.2);
       }
 
       planeMesh.geometry.setAttribute(
@@ -131,6 +131,9 @@ export class ThreeTuto2 extends Component {
 
     // 카메라 뷰 깊이
     camera.position.z = 50;
+    camera.rotateX(-50);
+    camera.rotateY(-50);
+    console.log(camera);
 
     const mouse = {
       x: undefined,
@@ -196,31 +199,31 @@ export class ThreeTuto2 extends Component {
       const { color } = intersects[0].object.geometry.attributes;
 
       // vertice 1
-      color.setX(intersects[0].face.a, 0.1);
-      color.setY(intersects[0].face.a, 0.5);
+      color.setX(intersects[0].face.a, 0.3);
+      color.setY(intersects[0].face.a, 0.6);
       color.setZ(intersects[0].face.a, 1);
 
       // vertice 2
-      color.setX(intersects[0].face.b, 0.1);
-      color.setY(intersects[0].face.b, 0.5);
+      color.setX(intersects[0].face.b, 0.3);
+      color.setY(intersects[0].face.b, 0.6);
       color.setZ(intersects[0].face.b, 1);
 
       // vertice 3
-      color.setX(intersects[0].face.c, 0.1);
-      color.setY(intersects[0].face.c, 0.5);
+      color.setX(intersects[0].face.c, 0.3);
+      color.setY(intersects[0].face.c, 0.6);
       color.setZ(intersects[0].face.c, 1);
 
       color.needsUpdate = true;
 
       const initialColor = {
-        r: 0,
-        g: 0.19,
-        b: 0.4
+        r: 0.05,
+        g: 0.1,
+        b: 0.2
       };
 
       const hoverColor = {
-        r: 0.1,
-        g: 0.5,
+        r: 0.3,
+        g: 0.6,
         b: 1
       };
       gsap.to(hoverColor, {
