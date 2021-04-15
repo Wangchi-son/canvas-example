@@ -153,7 +153,12 @@ export class ThreeTuto2 extends Component {
     this.raycaster.setFromCamera(this.mouse, this.camera);
     const intersects = this.raycaster.intersectObject(this.planeMesh);
     if (intersects.length > 0) {
-      console.log('intersecting');
+      intersects[0].object.geometry.attributes.color.setX(
+        intersects[0].face.a,
+        0
+      );
+
+      intersects[0].object.geometry.attributes.color.needsUpdate = true;
     }
   };
 
