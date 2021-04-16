@@ -10,6 +10,14 @@ export class ThreeTuto2 extends Component {
   componentDidMount() {
     const width = window.innerWidth;
     const height = window.innerHeight;
+    this.width = width;
+    this.height = height;
+
+    // resize 이벤트
+    window.addEventListener('resize', function (e) {
+      this.width = window.innerWidth;
+      this.height = window.innerWidth;
+    });
 
     //raycaster 추가
     const raycaster = new THREE.Raycaster();

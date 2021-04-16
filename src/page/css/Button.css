@@ -1,0 +1,35 @@
+* {
+  cursor: none;
+}
+
+.cursor,
+.follow {
+  position: absolute;
+  pointer-events: none;
+  width: 0.4rem;
+  height: 0.4rem;
+  transform: translate(-50%, -50%);
+}
+
+.cursor {
+  background-color: white;
+  border-radius: 100%;
+}
+
+.follow {
+  padding: 1rem;
+  border: 0.1rem solid white;
+  border-radius: 100%;
+  transition: all 0.3s ease-out;
+}
+
+.follow.on-focus {
+  transform: translate(-50%, -50%);
+  border: 0.1rem solid white;
+  border-radius: 0%;
+  padding: 0;
+}
+
+.follow.on-focus:hover {
+  transition: all 0.2s ease-out;
+}
