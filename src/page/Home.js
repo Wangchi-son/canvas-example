@@ -18,11 +18,17 @@ function Home() {
       duration: 3,
       delay: 0.4
     });
+    document.querySelector('#link').addEventListener('click', (e) => {
+      e.preventDefault();
+      gsap.to('#container', {
+        opacity: 0
+      });
+    });
   });
 
   return (
     <>
-      <div className="container">
+      <div className="container" id="container">
         <Button />
         <h1 className="title" id="title">
           WELCOME MY PORTFOLIO
