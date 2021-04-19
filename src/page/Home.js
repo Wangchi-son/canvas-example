@@ -18,12 +18,6 @@ function Home() {
       duration: 3,
       delay: 0.4
     });
-    document.querySelector('#link').addEventListener('click', (e) => {
-      e.preventDefault();
-      gsap.to('#container', {
-        opacity: 0
-      });
-    });
   });
 
   return (

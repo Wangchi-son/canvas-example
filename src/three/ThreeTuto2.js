@@ -4,7 +4,6 @@ import OrbitControls from 'three-orbitcontrols';
 
 import * as dat from 'dat.gui';
 import gsap from 'gsap';
-import { random } from 'gsap/gsap-core';
 
 export class ThreeTuto2 extends Component {
   componentDidMount() {
@@ -167,6 +166,29 @@ export class ThreeTuto2 extends Component {
     this.frame = frame;
     this.randomValue = randomValue;
     this.animate();
+
+    // 클릭 옵션
+    document.querySelector('#link').addEventListener('click', (e) => {
+      e.preventDefault();
+      gsap.to('#container', {
+        opacity: 0
+      });
+      gsap.to(camera.position, {
+        x: 75,
+        y: -75,
+        z: 10,
+        duration: 1.2
+      });
+      gsap.to(camera.rotation, {
+        x: 1,
+        y: 1,
+        duration: 12
+      });
+      gsap.to(light, {
+        intensity: 0,
+        duration: 1.2
+      });
+    });
   }
 
   // 첫 줄은 카메라 뷰로 렌더링하겠다
