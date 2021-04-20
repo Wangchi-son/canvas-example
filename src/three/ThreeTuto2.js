@@ -183,7 +183,7 @@ export class ThreeTuto2 extends Component {
       gsap.to(camera.rotation, {
         x: 1,
         y: 1,
-        duration: 2,
+        duration: 1.2,
         onComplete: () => {
           window.location = '/main';
         }

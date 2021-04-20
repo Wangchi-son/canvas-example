@@ -1,0 +1,20 @@
+#mainPage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background: black;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
