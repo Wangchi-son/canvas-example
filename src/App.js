@@ -1,13 +1,14 @@
 import React from 'react';
-import Home from './page/Home';
-import ThreeTuto2 from './three/ThreeTuto2';
+import { Route } from 'react-router-dom';
+import Homepage from './page/Homepage';
+import Main from './page/Main';
 // import Tutorial1 from "./canvas/Tutorial1";
 
 function App() {
   return (
     <>
-      <Home />
-      <ThreeTuto2 />
+      <Route exact path="/" component={Homepage} />
+      <Route exact path="/main" component={Main} />
     </>
   );
 }

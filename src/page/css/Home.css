@@ -43,7 +43,7 @@
   opacity: 0;
 }
 
-.link {
+#link {
   position: fixed;
   top: 75%;
   left: 50%;
@@ -63,7 +63,7 @@
   opacity: 0;
 }
 
-.link:hover {
+#link:hover {
   color: rgba(2, 6, 29, 0.8);
   font-weight: 500;
   cursor: none;

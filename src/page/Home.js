@@ -3,33 +3,34 @@ import Button from './Button';
 import './css/Home.css';
 
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
 
 function Home() {
   useEffect(() => {
     // title 효과
     gsap.to('#title', {
       opacity: 1,
-      duration: 3,
+      duration: 1,
       delay: 0.2
     });
     // link 효과
     gsap.to('#link', {
       opacity: 1,
-      duration: 3,
-      delay: 0.4
+      duration: 1,
+      delay: 0.2
     });
   });
 
   return (
     <>
       <div className="container" id="container">
-        <Button />
         <h1 className="title" id="title">
           WELCOME MY PORTFOLIO
         </h1>
-        <a href="#" className="link" id="link">
-          ENTER
-        </a>
+        <Button />
+        <Link to="/main" className="link" id="link">
+          Enter
+        </Link>
       </div>
     </>
   );

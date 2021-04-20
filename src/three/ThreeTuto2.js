@@ -177,12 +177,15 @@ export class ThreeTuto2 extends Component {
         x: 75,
         y: -75,
         z: 10,
-        duration: 1.2
+        duration: 1.2,
+        onComplete: () => {
+          window.location = '/main';
+        }
       });
       gsap.to(camera.rotation, {
         x: 1,
         y: 1,
-        duration: 12
+        duration: 1.2
       });
       gsap.to(light, {
         intensity: 0,
