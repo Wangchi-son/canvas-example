@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './css/Main.css';
 import gsap from 'gsap/gsap-core';
 import HomeButton from './tools/HomeButton';
@@ -24,7 +25,7 @@ function Main() {
     document.getElementById('profile').addEventListener('click', () => {
       gsap.to('#profile', {
         onComplete: () => {
-          window.location = '/main/#';
+          window.location = '/aboutme';
         }
       });
     });
@@ -48,7 +49,7 @@ function Main() {
     document.getElementById('myWork').addEventListener('click', () => {
       gsap.to('#myWork', {
         onComplete: () => {
-          window.location = '/main/##';
+          window.location = '/mywork';
         }
       });
     });
@@ -58,11 +59,15 @@ function Main() {
     <>
       <HomeButton />
       <div id="mainPage">
-        <div id="profileTitle">About me</div>
+        <Link to="aboutme" id="profileTitle">
+          About me
+        </Link>
         <div id="profile">
           <div className="background-image1"></div>
         </div>
-        <div id="myWorkTitle">My Work</div>
+        <Link to="mywork" id="myWorkTitle">
+          My Work
+        </Link>
         <div id="myWork">
           <div className="background-image2"></div>
         </div>

@@ -1,0 +1,27 @@
+.mainContainer {
+  position: relative;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.a {
+  background-color: red;
+}
+
+.b {
+  background-color: blue;
+}
+
+.c {
+  background-color: yellow;
+}

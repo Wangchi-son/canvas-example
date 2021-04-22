@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Button from './Button';
+import Button from './tools/Button';
 import './css/Home.css';
 
 import gsap from 'gsap';
