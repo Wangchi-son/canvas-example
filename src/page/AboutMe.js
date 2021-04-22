@@ -17,20 +17,38 @@ function AboutMe() {
     //   }
     // });
 
-    gsap.utils.toArray('.panel').forEach((panel, i) => {
-      ScrollTrigger.create({
-        trigger: panel,
-        start: 'top top',
+    // gsap.utils.toArray('.panel').forEach((panel, i) => {
+    //   ScrollTrigger.create({
+    //     trigger: panel,
+    //     start: 'top top',
+    //     pin: true,
+    //     pinSpacing: false
+    //   });
+    // });
+
+    const sections = gsap.utils.toArray('.panel');
+
+    gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.overX',
         pin: true,
-        pinSpacing: false
-      });
+        scrub: 1,
+        snap: 1 / (sections.length - 1),
+        end: () => '+=' + document.querySelector('.overX').offsetWidth
+      }
     });
   });
   return (
     <div className="mainContainer">
-      <div className="box a panel">panel 1</div>
-      <div className="box b panel">panel 2</div>
-      <div className="box c panel">panel 3</div>
+      <div className="overX">
+        <div className="row">
+          <div className="box a panel">panel 1</div>
+          <div className="box b panel">panel 2</div>
+          <div className="box c panel">panel 3</div>
+        </div>
+      </div>
     </div>
   );
 }
