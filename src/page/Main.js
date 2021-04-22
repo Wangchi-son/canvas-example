@@ -4,6 +4,7 @@ import gsap from 'gsap/gsap-core';
 
 function Main() {
   useEffect(() => {
+    // left side
     gsap.to('#profile', {
       opacity: 0.4,
       duration: 1,
@@ -19,7 +20,15 @@ function Main() {
         opacity: 0.4
       });
     });
+    document.getElementById('profile').addEventListener('click', () => {
+      gsap.to('#profile', {
+        onComplete: () => {
+          window.location = '/main/#';
+        }
+      });
+    });
 
+    // right side
     gsap.to('#myWork', {
       opacity: 0.4,
       duration: 1,
@@ -35,11 +44,17 @@ function Main() {
         opacity: 0.4
       });
     });
+    document.getElementById('myWork').addEventListener('click', () => {
+      gsap.to('#myWork', {
+        onComplete: () => {
+          window.location = '/main/##';
+        }
+      });
+    });
   });
 
   return (
     <div id="mainPage">
-      <h1 id="mainTitle">hello</h1>
       <div id="profile">
         <div className="background-image1"></div>
         <div id="leftHover"></div>
