@@ -6,18 +6,18 @@ function Main() {
   useEffect(() => {
     // left side
     gsap.to('#profile', {
-      opacity: 0.4,
+      opacity: 0.3,
       duration: 1,
       skewX: -15
     });
     document.getElementById('profile').addEventListener('mouseover', () => {
       gsap.to('#profile', {
-        opacity: 1
+        opacity: 0.7
       });
     });
     document.getElementById('profile').addEventListener('mouseout', () => {
       gsap.to('#profile', {
-        opacity: 0.4
+        opacity: 0.3
       });
     });
     document.getElementById('profile').addEventListener('click', () => {
@@ -30,18 +30,18 @@ function Main() {
 
     // right side
     gsap.to('#myWork', {
-      opacity: 0.4,
+      opacity: 0.3,
       duration: 1,
       skewX: -15
     });
     document.getElementById('myWork').addEventListener('mouseover', () => {
       gsap.to('#myWork', {
-        opacity: 1
+        opacity: 0.7
       });
     });
     document.getElementById('myWork').addEventListener('mouseout', () => {
       gsap.to('#myWork', {
-        opacity: 0.4
+        opacity: 0.3
       });
     });
     document.getElementById('myWork').addEventListener('click', () => {
@@ -55,13 +55,13 @@ function Main() {
 
   return (
     <div id="mainPage">
+      <div id="profileTitle">About me</div>
       <div id="profile">
         <div className="background-image1"></div>
-        <div id="leftHover"></div>
       </div>
+      <div id="myWorkTitle">My Work</div>
       <div id="myWork">
         <div className="background-image2"></div>
-        <div id="rightHover"></div>
       </div>
     </div>
   );
