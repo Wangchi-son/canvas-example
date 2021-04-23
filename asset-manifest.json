@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/canvas-example/static/css/main.fd9e0a5c.chunk.css",
+    "main.js": "/canvas-example/static/js/main.51ac628f.chunk.js",
+    "main.js.map": "/canvas-example/static/js/main.51ac628f.chunk.js.map",
+    "runtime-main.js": "/canvas-example/static/js/runtime-main.d1d143f0.js",
+    "runtime-main.js.map": "/canvas-example/static/js/runtime-main.d1d143f0.js.map",
+    "static/js/2.e050212c.chunk.js": "/canvas-example/static/js/2.e050212c.chunk.js",
+    "static/js/2.e050212c.chunk.js.map": "/canvas-example/static/js/2.e050212c.chunk.js.map",
+    "static/js/3.b8ad8421.chunk.js": "/canvas-example/static/js/3.b8ad8421.chunk.js",
+    "static/js/3.b8ad8421.chunk.js.map": "/canvas-example/static/js/3.b8ad8421.chunk.js.map",
+    "index.html": "/canvas-example/index.html",
+    "static/css/main.fd9e0a5c.chunk.css.map": "/canvas-example/static/css/main.fd9e0a5c.chunk.css.map",
+    "static/js/2.e050212c.chunk.js.LICENSE.txt": "/canvas-example/static/js/2.e050212c.chunk.js.LICENSE.txt",
+    "static/media/Main.css": "/canvas-example/static/media/studyBook.505c4ff6.jpg",
+    "static/media/AboutMe.css": "/canvas-example/static/media/profile.670ab28f.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d1d143f0.js",
+    "static/js/2.e050212c.chunk.js",
+    "static/css/main.fd9e0a5c.chunk.css",
+    "static/js/main.51ac628f.chunk.js"
+  ]
+}
