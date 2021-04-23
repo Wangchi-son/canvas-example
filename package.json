@@ -1,8 +1,8 @@
 {
-  "homepage": "https://wangchi-son.github.io/canvas-example/",
   "name": "canvas-example",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://wangchi-son.github.io/canvas-example/",
   "dependencies": {
     "@inlet/react-pixi": "^6.5.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -23,7 +23,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "predeploy": "yarn run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
