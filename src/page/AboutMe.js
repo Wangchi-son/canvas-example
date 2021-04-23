@@ -1,30 +1,51 @@
-import gsap, { ScrollTrigger } from 'gsap/all';
+import gsap, { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
 import React, { useEffect } from 'react';
 
 import './css/AboutMe.css';
+import HomeButton from './tools/HomeButton';
+
+import { BsFillCircleFill } from 'react-icons/bs';
 
 function AboutMe() {
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    // gsap.to('.b', {
-    //   scrollTrigger: {
-    //     trigger: '.b',
-    //     start: 'top top',
-    //     scrub: 1,
-    //     pin: true,
-    //     markers: true,
-    //     toggleActions: 'restart pause reverse pause'
-    //   }
-    // });
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    // gsap.utils.toArray('.panel').forEach((panel, i) => {
-    //   ScrollTrigger.create({
-    //     trigger: panel,
-    //     start: 'top top',
-    //     pin: true,
-    //     pinSpacing: false
-    //   });
-    // });
+    const panelsSection = document.querySelector('.overX');
+    const panelsContainer = document.querySelector('.row');
+
+    document.querySelectorAll('.anchor').forEach((anchor) => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetElem = document.querySelector(
+          e.target.getAttribute('href')
+        );
+        if (
+          targetElem &&
+          panelsContainer.isSameNode(targetElem.parentElement)
+        ) {
+          const containerOffset =
+            panelsSection.offsetTop + targetElem.offsetLeft;
+          console.log(containerOffset / 2);
+
+          gsap.to(window, {
+            scrollTo: {
+              y: containerOffset / 2,
+              autoKill: false
+            },
+            duration: 1
+          });
+        } else {
+          gsap.to(window, {
+            scrollTo: {
+              y: targetElem,
+              autoKill: false
+            },
+            duration: 1
+          });
+        }
+      });
+    });
 
     const sections = gsap.utils.toArray('.panel');
 
@@ -42,13 +63,32 @@ function AboutMe() {
   });
   return (
     <div className="mainContainer">
-      <div className="overX">
+      <HomeButton />
+      <div id="navbar">
+        <a href="#panel-1" className="anchor">
+          &sdot;
+        </a>
+        <a href="#panel-2" className="anchor">
+          &sdot;
+        </a>
+        <a href="#panel-3" className="anchor">
+          &sdot;
+        </a>
+      </div>
+      <div className="overX ">
         <div className="row">
-          <div className="box a panel">panel 1</div>
-          <div className="box b panel">panel 2</div>
-          <div className="box c panel">panel 3</div>
+          <div className="box a panel" id="panel-1">
+            panel 1
+          </div>
+          <div className="box b panel" id="panel-2">
+            panel 2
+          </div>
+          <div className="box c panel " id="panel-3">
+            panel 3
+          </div>
         </div>
       </div>
+      <div className="box nx ">next page</div>
     </div>
   );
 }
