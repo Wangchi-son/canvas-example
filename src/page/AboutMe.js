@@ -4,8 +4,6 @@ import React, { useEffect } from 'react';
 import './css/AboutMe.css';
 import HomeButton from './tools/HomeButton';
 
-import { BsFillCircleFill } from 'react-icons/bs';
-
 function AboutMe() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -26,7 +24,6 @@ function AboutMe() {
         ) {
           const containerOffset =
             panelsSection.offsetTop + targetElem.offsetLeft;
-          console.log(containerOffset / 2);
 
           gsap.to(window, {
             scrollTo: {
@@ -78,7 +75,11 @@ function AboutMe() {
       <div className="overX ">
         <div className="row">
           <div className="box a panel" id="panel-1">
-            panel 1
+            <h1 className="mainTitle">
+              <p>I’m a Newcomer</p>
+              <p>Frontend Developer,</p>
+            </h1>
+            <div className="profile"></div>
           </div>
           <div className="box b panel" id="panel-2">
             panel 2
