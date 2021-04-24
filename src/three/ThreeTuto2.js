@@ -185,7 +185,7 @@ export class ThreeTuto2 extends Component {
         y: 1,
         duration: 1.2,
         onComplete: () => {
-          window.location = '/main';
+          window.location = 'http://localhost:3000/#/main';
         }
       });
       gsap.to(light, {

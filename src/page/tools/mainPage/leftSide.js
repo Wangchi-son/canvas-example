@@ -33,7 +33,7 @@ export default function LeftSide() {
       delay: 0.6,
       duration: 1.4,
       onComplete: () => {
-        window.location = '/aboutme';
+        window.location = 'http://localhost:3000/#/aboutme';
       }
     });
     gsap.to('#myWork', {

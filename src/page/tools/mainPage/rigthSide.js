@@ -33,7 +33,7 @@ export default function RightSide() {
       delay: 0.6,
       duration: 1.4,
       onComplete: () => {
-        window.location = '/mywork';
+        window.location = 'http://localhost:3000/#/mywork';
       }
     });
     gsap.to('#profile', {
