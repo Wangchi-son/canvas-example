@@ -19,15 +19,11 @@ function Main() {
     <>
       <HomeButton />
       <div id="mainPage">
-        <Link to="aboutme" id="profileTitle">
-          About me
-        </Link>
+        <div id="profileTitle">About me</div>
         <div id="profile">
           <div className="background-image1"></div>
         </div>
-        <Link to="mywork" id="myWorkTitle">
-          My Work
-        </Link>
+        <div id="myWorkTitle">My Work</div>
         <div id="myWork">
           <div className="background-image2"></div>
         </div>

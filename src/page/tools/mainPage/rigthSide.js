@@ -54,4 +54,42 @@ export default function RightSide() {
       duration: 1.4
     });
   });
+
+  document.getElementById('myWorkTitle').addEventListener('click', () => {
+    gsap.to('#myWorkTitle', {
+      opacity: 0,
+      duration: 0.3
+    });
+
+    gsap.to('.background-image2', {
+      height: '100%',
+      duration: 0.6
+    });
+    gsap.to('#myWork', {
+      opacity: 0,
+      x: 2000,
+      delay: 0.6,
+      duration: 1.4,
+      onComplete: () => {
+        window.location = 'http://localhost:3000/#/mywork';
+      }
+    });
+    gsap.to('#profile', {
+      x: -2000,
+      delay: 0.6,
+      duration: 1.4
+    });
+    gsap.to('#profileTitle', {
+      color: 'rgb(0,0,0)',
+      borderColor: 'rgb(0,0,0)',
+      delay: 0.6,
+      duration: 1.4
+    });
+    gsap.to('#myWorkTitle', {
+      color: 'rgb(0,0,0)',
+      borderColor: 'rgb(0,0,0)',
+      delay: 0.6,
+      duration: 1.4
+    });
+  });
 }
