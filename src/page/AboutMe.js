@@ -1,5 +1,5 @@
-import gsap, { ScrollTrigger, ScrollToPlugin } from 'gsap/all';
-import React, { useEffect } from 'react';
+import gsap, { ScrollTrigger, ScrollToPlugin, TextPlugin } from 'gsap/all';
+import React, { useEffect, useState } from 'react';
 
 import './css/AboutMe.css';
 import HomeButton from './tools/HomeButton';
@@ -8,7 +8,7 @@ import Motivation from '../static/images/motivation.jpg';
 
 function AboutMe() {
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, TextPlugin);
 
     // anchor 옵션
     const panelsSection = document.querySelector('.overX');
@@ -27,10 +27,11 @@ function AboutMe() {
         ) {
           const containerOffset =
             panelsSection.offsetTop + targetElem.offsetLeft;
+          console.log(targetElem.offsetLeft);
 
           gsap.to(window, {
             scrollTo: {
-              y: containerOffset / 2,
+              y: containerOffset * 1.5,
               autoKill: false
             },
             duration: 1
@@ -50,21 +51,6 @@ function AboutMe() {
     // 패널 옵션
 
     const sections = gsap.utils.toArray('.panel');
-
-    // // 프로필 move 옵션
-    // gsap.to('.profile', {
-    //   xPercent: -100 * (sections.length - 1.5),
-    //   ease: 'none',
-    //   scrollTrigger: {
-    //     trigger: '.overX',
-    //     pin: true,
-    //     scrub: 1,
-    //     start: 'top top',
-    //     end: () => '+=' + document.querySelector('.overX').offsetWidth
-    //   },
-    //   left: 0,
-    //   duration: 1
-    // });
     let maxWidth = 0;
 
     const getMaxWidth = () => {
@@ -74,8 +60,6 @@ function AboutMe() {
       });
     };
     getMaxWidth();
-
-    console.log(sections[0].offsetWidth);
 
     gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
@@ -92,6 +76,8 @@ function AboutMe() {
 
     ScrollTrigger.addEventListener('refreshInit', getMaxWidth);
 
+    // 클래스 추가
+
     sections.forEach((sct, i) => {
       ScrollTrigger.create({
         trigger: sct,
@@ -105,18 +91,75 @@ function AboutMe() {
         toggleClass: { targets: sct, className: 'move' + i }
       });
     });
+
+    // 텍스트 효과
+    document.querySelector('#panel-1').addEventListener('mouseover', () => {
+      gsap.to('.p', {
+        duration: 1.4,
+        text: "I'm a<br /> Beginner<br/> Frontend<br /> Developer"
+      });
+    });
+    document.querySelector('#panel-2').addEventListener('mouseover', () => {
+      gsap.to('.p', {
+        duration: 1,
+        text: 'Introduce <br/> My self'
+      });
+
+      gsap.to('.anchor', {
+        color: 'rgb(255,255,255)'
+      });
+    });
+    document.querySelector('#panel-3').addEventListener('mouseover', () => {
+      gsap.to('.p', {
+        duration: 1,
+        text: 'Motivation'
+      });
+      gsap.to('.anchor', {
+        color: 'rgb(0,0,0)'
+      });
+    });
+
+    // anchor 텍스트 효과
+    document.querySelector('.anc1').addEventListener('click', () => {
+      gsap.to('.p', {
+        duration: 1.4,
+        text: "I'm a<br /> Beginner<br/> Frontend<br /> Developer"
+      });
+      gsap.to('.anchor', {
+        color: 'rgb(255,255,255)'
+      });
+    });
+    document.querySelector('.anc2').addEventListener('click', () => {
+      gsap.to('.p', {
+        duration: 1,
+        text: 'Introduce <br/> My self'
+      });
+      gsap.to('.anchor', {
+        color: 'rgb(255,255,255)'
+      });
+    });
+    document.querySelector('.anc3').addEventListener('click', () => {
+      gsap.to('.p', {
+        duration: 1,
+        text: 'Motivation'
+      });
+      gsap.to('.anchor', {
+        color: 'rgb(0,0,0)'
+      });
+    });
   });
+
   return (
     <div className="mainContainer">
       <HomeButton />
       <div id="navbar">
-        <a href="#panel-1" className="anchor">
+        <a href="#panel-1" className="anchor anc1">
           &sdot;
         </a>
-        <a href="#panel-2" className="anchor">
+        <a href="#panel-2" className="anchor anc2">
           &sdot;
         </a>
-        <a href="#panel-3" className="anchor">
+        <a href="#panel-3" className="anchor anc3">
           &sdot;
         </a>
       </div>
@@ -125,10 +168,10 @@ function AboutMe() {
           <div className="box a panel" id="panel-1"></div>
           <div className="box b panel" id="panel-2"></div>
           <h1 className="mainTitle">
-            <p>
-              I’m a Newcomer
-              <br />
-              Frontend Developer,
+            <p className="p">
+              I'm a<br /> Beginner
+              <br /> Frontend
+              <br /> Developer
             </p>
           </h1>
           <div className="profile"></div>

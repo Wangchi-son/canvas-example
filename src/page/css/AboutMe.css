@@ -14,11 +14,11 @@
 
 .anchor {
   margin: 15px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-size: 70px;
   z-index: 5000;
   text-decoration: none;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 .anchor:hover {
@@ -40,6 +40,7 @@
 
 .overX {
   overflow-x: hidden;
+  background-color: black;
 }
 
 .row {
@@ -59,10 +60,11 @@
   position: absolute;
   left: 5%;
   bottom: 10%;
-  font-size: 120px;
+  font-size: 150px;
   font-weight: 800;
   letter-spacing: 4px;
   z-index: 1000;
+  pointer-events: none;
 }
 
 .move0 + .panel + .mainTitle p {
@@ -86,7 +88,7 @@
 .profile {
   position: absolute;
   top: 0;
-  right: 50%;
+  right: 55%;
   transition: all 0.8s ease-out;
   opacity: 0;
   width: 45%;
@@ -95,6 +97,7 @@
   background-size: cover;
   background-position: 50%;
   z-index: 100;
+  pointer-events: none;
 }
 
 .b {
@@ -102,10 +105,12 @@
 }
 
 .c {
+  background-color: white;
 }
 
 #motivation {
   width: 50%;
+  pointer-events: none;
 }
 
 .nx {
