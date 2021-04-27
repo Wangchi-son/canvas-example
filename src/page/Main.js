@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './css/Main.css';
-import gsap from 'gsap/gsap-core';
 import HomeButton from './tools/HomeButton';
 
 import RightSide from './tools/mainPage/rigthSide';

@@ -5,7 +5,7 @@ import './css/HomeButton.css';
 
 function HomeButton() {
   return (
-    <Link to="/" id="HomeButton">
+    <Link to="/" id="HomeButton" className="stateWhite1 stateBlack2">
       <AiFillHome />
     </Link>
   );

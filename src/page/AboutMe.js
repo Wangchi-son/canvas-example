@@ -1,5 +1,5 @@
 import gsap, { ScrollTrigger, ScrollToPlugin, TextPlugin } from 'gsap/all';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import './css/AboutMe.css';
 import HomeButton from './tools/HomeButton';
@@ -27,7 +27,6 @@ function AboutMe() {
         ) {
           const containerOffset =
             panelsSection.offsetTop + targetElem.offsetLeft;
-          console.log(targetElem.offsetLeft);
 
           gsap.to(window, {
             scrollTo: {
@@ -49,7 +48,6 @@ function AboutMe() {
     });
 
     // 패널 옵션
-
     const sections = gsap.utils.toArray('.panel');
     let maxWidth = 0;
 
@@ -76,14 +74,12 @@ function AboutMe() {
 
     ScrollTrigger.addEventListener('refreshInit', getMaxWidth);
 
-    // 클래스 추가
+    // 토글 효과 추가
     const titleList = [
       "I'm a<br /> Beginner<br/> Frontend<br /> Developer",
       'Introduce <br/> My self',
       'Motivation'
     ];
-    const colorList = ['rgb(255,255,255)', 'rgb(255,255,255)', 'rgb(0,0,0)'];
-
     sections.forEach((sct, i) => {
       ScrollTrigger.create({
         trigger: sct,
@@ -96,7 +92,6 @@ function AboutMe() {
           `+=${sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth))}`,
         toggleClass: { targets: sct, className: 'move' + i },
         onEnter: () => {
-          console.log(`anc${i}`);
           gsap.to('.p', {
             duration: 1.4,
             text: titleList[i]
@@ -106,6 +101,11 @@ function AboutMe() {
           });
           gsap.to(`.stateBlack${i}`, {
             color: 'rgb(0,0,0)'
+          });
+          gsap.to(`.lightOut${i}`, {
+            display: 'flex',
+            duration: 1.4,
+            opacity: 1
           });
         },
         onEnterBack: () => {
@@ -119,38 +119,69 @@ function AboutMe() {
           gsap.to(`.stateWhite${i}`, {
             color: 'rgb(255,255,255)'
           });
+          gsap.to(`.lightOut${i}`, {
+            display: 'flex',
+            duration: 1.4,
+            opacity: 1
+          });
         },
         onLeave: () => {
           gsap.to(`.anc${i}`, {
             opacity: 0.7
+          });
+          gsap.to(`.lightOut${i}`, {
+            duration: 1,
+            opacity: 0,
+            display: 'disabled',
+            pointerEvents: 'none'
           });
         },
         onLeaveBack: () => {
           gsap.to(`.anc${i}`, {
             opacity: 0.7
           });
+          gsap.to(`.lightOut${i}`, {
+            duration: 1,
+            opacity: 0,
+            display: 'disabled',
+            pointerEvents: 'none'
+          });
         }
       });
     });
 
-    const anchors = gsap.utils.toArray('.anchor');
-
-    // anchors.forEach((anc, i) => {
-    //   ScrollTrigger.create({
-    //     trigger: sections[i],
-    //     start: () =>
-    //       `top top-=${
-    //         (sections[i].offsetLeft - window.innerWidth / 2) *
-    //         (maxWidth / (maxWidth - window.innerWidth))
-    //       }`,
-    //     end: () =>
-    //       `+=${
-    //         sections[i].offsetWidth *
-    //         (maxWidth / (maxWidth - window.innerWidth))
-    //       }`,
-    //     toggleClass: { targets: anc, className: 'now' }
+    // document.querySelector('.c').addEventListener('mouseover', () => {
+    //   gsap.to('.stateBlack2', {
+    //     color: 'rgb(0,0,0)',
+    //     duration: 0.1
+    //   });
+    //   gsap.to('.anchor', {
+    //     display: 'block',
+    //     duration: 0.1
     //   });
     // });
+    document.addEventListener('scroll', () => {
+      console.log('hello');
+      if (window.pageYOffset >= document.querySelector('.nx').offsetTop) {
+        gsap.to('.stateWhite1', {
+          color: 'rgb(255,255,255)'
+        });
+        gsap.to('.anchor', {
+          display: 'none',
+          opacity: 0
+        });
+      } else if (
+        window.pageYOffset >= document.querySelector('.c').offsetLeft
+      ) {
+        gsap.to('.stateBlack2', {
+          color: 'rgb(0,0,0)'
+        });
+        gsap.to('.anchor', {
+          display: 'block',
+          opacity: 0.7
+        });
+      }
+    });
   });
 
   return (
@@ -170,38 +201,7 @@ function AboutMe() {
       <div className="overX">
         <div className="row">
           <div className="box a panel" id="panel-1"></div>
-          <div className="box b panel" id="panel-2">
-            <div id="introBox">
-              <h3 className="introduce" id="name">
-                이름:<span> 손원재</span>
-              </h3>
-              <h3 className="introduce" id="age">
-                나이:<span> 26세</span>
-              </h3>
-              <h3 className="introduce" id="academicBg">
-                학력:<span> 계명대학교 졸업</span>
-              </h3>
-              <h3 className="introduce" id="major">
-                전공:<span> 산업디자인 학과</span>
-              </h3>
-              <h3 className="introduce" id="major">
-                수상 경력:<span> 희망이음 경진대회 (동상) 수상</span>
-              </h3>
-              <h3 className="introduce" id="major">
-                코딩 경험:
-                <span>
-                  &nbsp;교내 IT융합교육센터 주관 코딩집중캠프 참여
-                  <br />
-                  &ensp;&ensp;&ensp;&ensp;&ensp;&emsp;&emsp;패스트캠퍼스
-                  온라인강의 수강
-                </span>
-              </h3>
-              <h3 className="introduce" id="major">
-                자격증:
-                <span> MOS MASTER</span>
-              </h3>
-            </div>
-          </div>
+          <div className="box b panel" id="panel-2"></div>
 
           <h1 className="mainTitle">
             <p className="p">
@@ -211,13 +211,68 @@ function AboutMe() {
             </p>
           </h1>
           <div className="profile"></div>
+          <div id="introBox" className="lightOut1">
+            <h3 className="introduce" id="name">
+              이름:<span> 손원재</span>
+            </h3>
+            <h3 className="introduce" id="age">
+              나이:<span> 26세</span>
+            </h3>
+            <h3 className="introduce" id="academicBg">
+              학력:<span> 계명대학교 졸업</span>
+            </h3>
+            <h3 className="introduce" id="major">
+              전공:<span> 산업디자인 학과</span>
+            </h3>
+            <h3 className="introduce" id="major">
+              수상 경력:<span> 희망이음 경진대회 (동상) 수상</span>
+            </h3>
+            <h3 className="introduce" id="major">
+              코딩 경험:
+              <span>
+                &nbsp;교내 IT융합교육센터 주관 코딩집중캠프 참여
+                <br />
+                &ensp;&ensp;&ensp;&ensp;&ensp;&emsp;&emsp;패스트캠퍼스
+                온라인강의 수강
+              </span>
+            </h3>
+            <h3 className="introduce" id="major">
+              자격증:
+              <span> MOS MASTER</span>
+            </h3>
+          </div>
 
           <div className="box c panel " id="panel-3">
-            <img src={Motivation} alt="motivation" id="motivation"></img>
+            <div id="motivation">
+              <h4 className="motive">
+                제가 디자인 전공에서 개발관련 직종을 희망하게 된 계기는
+                <br />
+                대학생활 마지막 학기에 인턴기회가 찾아와 한 학기동안
+                <br />
+                인쇄 시안을 관리하는 시각디자인 관련 인턴 업무를
+                <br />
+                맡고 있었을 때 였습니다. 저는 업무 중 새로운
+                <br />
+                브랜드 출시로 우연히 새로 구축된 사이트를
+                <br />
+                보게 되었는데, 그 때 어떤 강렬한 느낌을
+                <br />
+                받았고 웹 개발이야말로 제가 원했던
+                <br />
+                창작활동이라고 생각해 웹 개발에
+                <br />
+                무작정 뛰어들게 되었습니다.
+              </h4>
+              <img src={Motivation} alt="motivation" id="motivePic"></img>
+            </div>
           </div>
         </div>
       </div>
-      <div className="box nx ">next page</div>
+      <div className="box nx nextPage">
+        <div className="nxHover"></div>
+        <div className="desertBg"></div>
+      </div>
+      <div className="stateWhite0 stateWhite2 stateBlack0 stateBlack1 lightOut0 lightOut2 nothing"></div>
     </div>
   );
 }

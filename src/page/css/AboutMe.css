@@ -13,6 +13,7 @@
 }
 
 .anchor {
+  display: block;
   margin: 15px;
   color: rgb(255, 255, 255);
   font-size: 70px;
@@ -99,7 +100,6 @@
   background-image: url('../../static/images/profile.jpg');
   background-size: cover;
   background-position: 50%;
-  z-index: 100;
   pointer-events: none;
 }
 
@@ -110,12 +110,16 @@
 #introBox {
   position: absolute;
   top: 50%;
-  right: 30%;
-  transform: translate(-50%, -50%);
+  left: 50%;
+  transform: translate(0%, -50%);
 
-  display: flex;
+  display: none;
   flex-direction: column;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
 }
+
 .introduce {
   font-size: 22px;
   font-weight: 500;
@@ -133,13 +137,62 @@ span {
 #motivation {
   position: absolute;
   top: 50%;
-  right: 0;
+  left: 0;
   transform: translate(0, -50%);
+  width: 100%;
+  height: 58%;
 
-  width: 55%;
   pointer-events: none;
 }
 
-.nx {
-  background-color: aqua;
+#motivePic {
+  position: absolute;
+  right: 0;
+  height: 100%;
+}
+
+.motive {
+  position: absolute;
+  top: 0;
+  right: 58%;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 1px;
+  color: black;
+  text-align: right;
+
+  transform: translate(0, 0);
+
+  border-right: 2px solid black;
+  padding-right: 10px;
+}
+
+.nextPage {
+  background-color: black;
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
+
+.nxHover {
+  background-color: black;
+  opacity: 0.7;
+  z-index: 1000;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.desertBg {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../../static/images/desertBg1.jpg');
+  background-size: cover;
+}
+
+.nothing {
+  display: none;
 }

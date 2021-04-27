@@ -17,7 +17,7 @@ function Button() {
 
     if (cursor) {
       window.addEventListener('mousemove', function (event) {
-        if (event.target.tagName == 'A') {
+        if (event.target.tagName === 'A') {
           cursor.style.background = 'transparent';
 
           follow.style.top = event.target.offsetTop + 'px';

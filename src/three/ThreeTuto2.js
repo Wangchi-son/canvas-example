@@ -141,7 +141,6 @@ export class ThreeTuto2 extends Component {
     camera.position.z = 50;
     camera.rotateX(-50);
     camera.rotateY(-50);
-    console.log(camera);
 
     const mouse = {
       x: undefined,
