@@ -10,42 +10,42 @@ function AboutMe() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, TextPlugin);
 
-    // anchor 옵션
+    // // anchor 옵션
     const panelsSection = document.querySelector('.overX');
     const panelsContainer = document.querySelector('.row');
 
-    document.querySelectorAll('.anchor').forEach((anchor) => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
+    // document.querySelectorAll('.anchor').forEach((anchor) => {
+    //   anchor.addEventListener('click', function (e) {
+    //     e.preventDefault();
 
-        const targetElem = document.querySelector(
-          e.target.getAttribute('href')
-        );
-        if (
-          targetElem &&
-          panelsContainer.isSameNode(targetElem.parentElement)
-        ) {
-          const containerOffset =
-            panelsSection.offsetTop + targetElem.offsetLeft;
+    //     const targetElem = document.querySelector(
+    //       e.target.getAttribute('href')
+    //     );
+    //     if (
+    //       targetElem &&
+    //       panelsContainer.isSameNode(targetElem.parentElement)
+    //     ) {
+    //       const containerOffset =
+    //         panelsSection.offsetTop + targetElem.offsetLeft;
 
-          gsap.to(window, {
-            scrollTo: {
-              y: containerOffset * 1.5,
-              autoKill: false
-            },
-            duration: 1
-          });
-        } else {
-          gsap.to(window, {
-            scrollTo: {
-              y: targetElem,
-              autoKill: false
-            },
-            duration: 1
-          });
-        }
-      });
-    });
+    //       gsap.to(window, {
+    //         scrollTo: {
+    //           y: containerOffset * 1.5,
+    //           autoKill: false
+    //         },
+    //         duration: 1
+    //       });
+    //     } else {
+    //       gsap.to(window, {
+    //         scrollTo: {
+    //           y: targetElem,
+    //           autoKill: false
+    //         },
+    //         duration: 1
+    //       });
+    //     }
+    //   });
+    // });
 
     // 패널 옵션
     const sections = gsap.utils.toArray('.panel');
@@ -80,6 +80,68 @@ function AboutMe() {
       'Introduce <br/> My self',
       'Motivation'
     ];
+
+    document.querySelectorAll('.anchor').forEach((anc, i) => {
+      anc.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const targetElem = document.querySelector(
+          e.target.getAttribute('href')
+        );
+        if (
+          targetElem &&
+          panelsContainer.isSameNode(targetElem.parentElement)
+        ) {
+          gsap.to(window, {
+            scrollTo: {
+              y: targetElem.offsetLeft + (targetElem.offsetWidth / 2) * i,
+              autoKill: false
+            },
+            duration: 1
+          });
+        }
+      });
+
+      anc.addEventListener('mouseover', () => {
+        gsap.to(anc, {
+          opacity: 1
+        });
+      });
+      anc.addEventListener('mouseout', () => {
+        gsap.to(anc, {
+          opacity: 0.7
+        });
+      });
+    });
+
+    ScrollTrigger.create({
+      trigger: document.querySelector('.nx'),
+      onToggle: (e) => {
+        if (e.progress === 0) {
+          gsap.to('.stateBlack2', {
+            display: 'block',
+            color: 'rgb(0,0,0)',
+            opacity: 0.7
+          });
+          gsap.to('.anchor', {
+            display: 'block',
+            opacity: 0.7
+          });
+          gsap.to('.anc2', {
+            opacity: 1
+          });
+        } else if (e.progress > 0) {
+          gsap.to('.stateWhite1', {
+            color: 'rgb(255,255,255)'
+          });
+          gsap.to('.anchor', {
+            display: 'none',
+            opacity: 0
+          });
+        }
+      }
+    });
+
     sections.forEach((sct, i) => {
       ScrollTrigger.create({
         trigger: sct,
@@ -92,6 +154,7 @@ function AboutMe() {
           `+=${sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth))}`,
         toggleClass: { targets: sct, className: 'move' + i },
         onEnter: () => {
+          console.log(window.scrollY);
           gsap.to('.p', {
             duration: 1.4,
             text: titleList[i]
@@ -148,39 +211,6 @@ function AboutMe() {
           });
         }
       });
-    });
-
-    // document.querySelector('.c').addEventListener('mouseover', () => {
-    //   gsap.to('.stateBlack2', {
-    //     color: 'rgb(0,0,0)',
-    //     duration: 0.1
-    //   });
-    //   gsap.to('.anchor', {
-    //     display: 'block',
-    //     duration: 0.1
-    //   });
-    // });
-    document.addEventListener('scroll', () => {
-      console.log('hello');
-      if (window.pageYOffset >= document.querySelector('.nx').offsetTop) {
-        gsap.to('.stateWhite1', {
-          color: 'rgb(255,255,255)'
-        });
-        gsap.to('.anchor', {
-          display: 'none',
-          opacity: 0
-        });
-      } else if (
-        window.pageYOffset >= document.querySelector('.c').offsetLeft
-      ) {
-        gsap.to('.stateBlack2', {
-          color: 'rgb(0,0,0)'
-        });
-        gsap.to('.anchor', {
-          display: 'block',
-          opacity: 0.7
-        });
-      }
     });
   });
 
