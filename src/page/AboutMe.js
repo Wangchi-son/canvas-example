@@ -165,11 +165,6 @@ function AboutMe() {
           gsap.to(`.stateBlack${i}`, {
             color: 'rgb(0,0,0)'
           });
-          gsap.to(`.lightOut${i}`, {
-            display: 'flex',
-            duration: 1.4,
-            opacity: 1
-          });
         },
         onEnterBack: () => {
           gsap.to('.p', {
@@ -182,32 +177,15 @@ function AboutMe() {
           gsap.to(`.stateWhite${i}`, {
             color: 'rgb(255,255,255)'
           });
-          gsap.to(`.lightOut${i}`, {
-            display: 'flex',
-            duration: 1.4,
-            opacity: 1
-          });
         },
         onLeave: () => {
           gsap.to(`.anc${i}`, {
             opacity: 0.7
           });
-          gsap.to(`.lightOut${i}`, {
-            duration: 1,
-            opacity: 0,
-            display: 'disabled',
-            pointerEvents: 'none'
-          });
         },
         onLeaveBack: () => {
           gsap.to(`.anc${i}`, {
             opacity: 0.7
-          });
-          gsap.to(`.lightOut${i}`, {
-            duration: 1,
-            opacity: 0,
-            display: 'disabled',
-            pointerEvents: 'none'
           });
         }
       });
