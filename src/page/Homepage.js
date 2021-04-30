@@ -14,6 +14,7 @@ function Homepage() {
   return (
     <>
       <Home />
+      <div id="text"></div>
       <ThreeTuto2 />
       <div className="nx"></div>
     </>

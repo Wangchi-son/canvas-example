@@ -13,40 +13,6 @@ function AboutMe() {
     // // anchor 옵션
     const panelsSection = document.querySelector('.overX');
     const panelsContainer = document.querySelector('.row');
-
-    // document.querySelectorAll('.anchor').forEach((anchor) => {
-    //   anchor.addEventListener('click', function (e) {
-    //     e.preventDefault();
-
-    //     const targetElem = document.querySelector(
-    //       e.target.getAttribute('href')
-    //     );
-    //     if (
-    //       targetElem &&
-    //       panelsContainer.isSameNode(targetElem.parentElement)
-    //     ) {
-    //       const containerOffset =
-    //         panelsSection.offsetTop + targetElem.offsetLeft;
-
-    //       gsap.to(window, {
-    //         scrollTo: {
-    //           y: containerOffset * 1.5,
-    //           autoKill: false
-    //         },
-    //         duration: 1
-    //       });
-    //     } else {
-    //       gsap.to(window, {
-    //         scrollTo: {
-    //           y: targetElem,
-    //           autoKill: false
-    //         },
-    //         duration: 1
-    //       });
-    //     }
-    //   });
-    // });
-
     // 패널 옵션
     const sections = gsap.utils.toArray('.panel');
     let maxWidth = 0;
@@ -76,7 +42,7 @@ function AboutMe() {
 
     // 토글 효과 추가
     const titleList = [
-      "I'm a<br /> Beginner<br/> Frontend<br /> Developer",
+      "I'm a<br />Frontend<br /> Web Developer",
       'Introduce <br/> My self',
       'Motivation'
     ];
@@ -213,9 +179,9 @@ function AboutMe() {
 
           <h1 className="mainTitle">
             <p className="p">
-              I'm a<br /> Beginner
-              <br /> Frontend
-              <br /> Developer
+              I'm a<br />
+              Frontend
+              <br /> Web Developer
             </p>
           </h1>
           <div className="profile"></div>

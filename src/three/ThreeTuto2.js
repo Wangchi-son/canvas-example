@@ -99,7 +99,7 @@ export class ThreeTuto2 extends Component {
       const colors = [];
       for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
         // r,g,b
-        colors.push(0.05, 0.1, 0.2);
+        colors.push(0, 0, 0);
       }
 
       planeMesh.geometry.setAttribute(
@@ -126,7 +126,7 @@ export class ThreeTuto2 extends Component {
 
     // 빛
     const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, -1, 1);
+    light.position.set(0.25, -0.25, 1);
     scene.add(light);
 
     // 뒤쪽 빛
@@ -232,32 +232,32 @@ export class ThreeTuto2 extends Component {
       const { color } = intersects[0].object.geometry.attributes;
 
       // vertice 1
-      color.setX(intersects[0].face.a, 0.3);
+      color.setX(intersects[0].face.a, 0.6);
       color.setY(intersects[0].face.a, 0.6);
-      color.setZ(intersects[0].face.a, 1);
+      color.setZ(intersects[0].face.a, 0.6);
 
       // vertice 2
-      color.setX(intersects[0].face.b, 0.3);
+      color.setX(intersects[0].face.b, 0.6);
       color.setY(intersects[0].face.b, 0.6);
-      color.setZ(intersects[0].face.b, 1);
+      color.setZ(intersects[0].face.b, 0.6);
 
       // vertice 3
-      color.setX(intersects[0].face.c, 0.3);
+      color.setX(intersects[0].face.c, 0.6);
       color.setY(intersects[0].face.c, 0.6);
-      color.setZ(intersects[0].face.c, 1);
+      color.setZ(intersects[0].face.c, 0.6);
 
       color.needsUpdate = true;
 
       const initialColor = {
-        r: 0.05,
-        g: 0.1,
-        b: 0.2
+        r: 0,
+        g: 0,
+        b: 0
       };
 
       const hoverColor = {
-        r: 0.3,
+        r: 0.6,
         g: 0.6,
-        b: 1
+        b: 0.6
       };
       gsap.to(hoverColor, {
         r: initialColor.r,
