@@ -7,12 +7,10 @@ import HomeButton from './tools/HomeButton';
 import Motivation from '../static/images/motivation.jpg';
 
 function AboutMe() {
-  useEffect(() => {
+  useEffect((e) => {
+    console.log(e);
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, TextPlugin);
 
-    // // anchor 옵션
-    const panelsSection = document.querySelector('.overX');
-    const panelsContainer = document.querySelector('.row');
     // 패널 옵션
     const sections = gsap.utils.toArray('.panel');
     let maxWidth = 0;
@@ -47,6 +45,9 @@ function AboutMe() {
       'Motivation'
     ];
 
+    // anchor 옵션
+    const panelsContainer = document.querySelector('.row');
+
     document.querySelectorAll('.anchor').forEach((anc, i) => {
       anc.addEventListener('click', (e) => {
         e.preventDefault();
@@ -67,45 +68,6 @@ function AboutMe() {
           });
         }
       });
-
-      anc.addEventListener('mouseover', () => {
-        gsap.to(anc, {
-          opacity: 1
-        });
-      });
-      anc.addEventListener('mouseout', () => {
-        gsap.to(anc, {
-          opacity: 0.7
-        });
-      });
-    });
-
-    ScrollTrigger.create({
-      trigger: document.querySelector('.nx'),
-      onToggle: (e) => {
-        if (e.progress === 0) {
-          gsap.to('.stateBlack2', {
-            display: 'block',
-            color: 'rgb(0,0,0)',
-            opacity: 0.7
-          });
-          gsap.to('.anchor', {
-            display: 'block',
-            opacity: 0.7
-          });
-          gsap.to('.anc2', {
-            opacity: 1
-          });
-        } else if (e.progress > 0) {
-          gsap.to('.stateWhite1', {
-            color: 'rgb(255,255,255)'
-          });
-          gsap.to('.anchor', {
-            display: 'none',
-            opacity: 0
-          });
-        }
-      }
     });
 
     sections.forEach((sct, i) => {
@@ -120,7 +82,6 @@ function AboutMe() {
           `+=${sct.offsetWidth * (maxWidth / (maxWidth - window.innerWidth))}`,
         toggleClass: { targets: sct, className: 'move' + i },
         onEnter: () => {
-          console.log(window.scrollY);
           gsap.to('.p', {
             duration: 1.4,
             text: titleList[i]
@@ -156,6 +117,7 @@ function AboutMe() {
         }
       });
     });
+    return () => {};
   });
 
   return (
@@ -241,10 +203,6 @@ function AboutMe() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="box nx nextPage">
-        <div className="nxHover"></div>
-        <div className="desertBg"></div>
       </div>
       <div className="stateWhite0 stateWhite2 stateBlack0 stateBlack1 lightOut0 lightOut2 nothing"></div>
     </div>

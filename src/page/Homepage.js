@@ -4,19 +4,13 @@ import ThreeTuto2 from '../three/ThreeTuto2';
 import Home from './Home';
 
 function Homepage() {
-  useEffect(() => {
-    if (document.querySelector('.nx').offsetTop === null) {
-      gsap.to('.nx', {
-        display: 'none'
-      });
-    }
-  });
+  useEffect(() => {});
   return (
     <>
       <Home />
       <div id="text"></div>
       <ThreeTuto2 />
-      <div className="nx"></div>
+      <div className="nx anc0"></div>
     </>
   );
 }
